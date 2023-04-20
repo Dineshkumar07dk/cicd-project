@@ -23,12 +23,16 @@
         name: git
         state: present
 
+    - name: removing existing path
+      shell: rm -rf /var/www/html
+      
     - name: Clone repository to /var/www/html
       git:
         repo: https://github.com/adminpratyusha/pipeline-project.git
         dest: /var/www/html
-
-    - name: restart httpd
+        clone: yes
+        
+    - name: restart nginx
       systemd:
         name: nginx
         state: restarted
